@@ -1,0 +1,43 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="PB" id="add-foreign-keys-to-tables">
+        <addForeignKeyConstraint baseTableName="address"
+                                 baseColumnNames="id"
+                                 constraintName="fk_address_client_id"
+                                 referencedTableName="client"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="orders"
+                                 baseColumnNames="client_id"
+                                 constraintName="fk_orders_client_id"
+                                 referencedTableName="client"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="orderdetails"
+                                 baseColumnNames="orders_id"
+                                 constraintName="fk_orderDetails_orders_id"
+                                 referencedTableName="orders"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="orderdetails"
+                                 baseColumnNames="products_id"
+                                 constraintName="fk_orderdetails_products_id"
+                                 referencedTableName="products"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="products"
+                                 baseColumnNames="category_id"
+                                 constraintName="fk_products_category"
+                                 referencedTableName="category"
+                                 referencedColumnNames="id"/>
+
+    </changeSet>
+
+</databaseChangeLog>
